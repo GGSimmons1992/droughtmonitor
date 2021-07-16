@@ -33,3 +33,16 @@ if __name__ == "__main__":
     california2020 = california2020.replace(np.nan,0)
     california2020['d0'] = df0['d0'] - california2020['d1']- california2020['d2'] - california2020['d3'] - california2020['d4']
     california2020 = california2020.replace(np.nan,0)
+
+    consec0 = pd.read_csv("../data/CA2020/d0Consecutive.csv")
+    consec1 = pd.read_csv("../data/CA2020/d1Consecutive.csv")
+    consec2 = pd.read_csv("../data/CA2020/d2Consecutive.csv")
+    consec3 = pd.read_csv("../data/CA2020/d3Consecutive.csv")
+    consec4 = pd.read_csv("../data/CA2020/d4Consecutive.csv")
+
+    consec0['DCat']=0
+    consec1['DCat']=1
+    consec2['DCat']=2
+    consec3['DCat']=3
+    consec4['DCat']=4
+    consecCA2020 = pd.concat([consec0,consec1,consec2,consec3,consec4]).sort_values(by=["County","StartDate"])
