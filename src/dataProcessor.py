@@ -4,10 +4,38 @@ import scipy.stats as stats
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 
-def renameNonConsecutiveWeeksAsDCategory(df,catname):
-    df = df.rename(columns = {"NonConsecutiveWeeks":catname})
-    return df
+def defineColor(dcat):
+    if (dcat == 0):
+        return 'yellow'
+    if (dcat == 1):
+        return 'orange'
+    if (dcat == 2):
+        return 'red'
+    if (dcat == 3):
+        return 'brown'
+    if (dcat == 4):
+        return 'black'
 
+def plotConsecTimeSeries(ax,df,countyName,legendLoc):
+    for index, row in df.iterrows():
+        x=[row['StartDate'],row['EndDate']]
+        y=[row['DCat'],row['DCat']]
+        c=defineColor(row['DCat'])
+        ax.fill_between(x,-1,y,color=c,label=f'D{row["DCat"]}')
+    ax.set_title(f'{countyName} drought status 2020')
+    ax.set_xlabel('date')
+    ax.tick_params(axis='x',labelrotation=45)
+    ax.set_ylabel('drought category')
+    ax.set_ylim([-1,4])
+    handles, labels = ax.get_legend_handles_labels()
+    handle_list, label_list = [], []
+    for handle, label in zip(handles, labels):
+        if label not in label_list:
+            handle_list.append(handle)
+            label_list.append(label)
+    ax.legend(handle_list, label_list,loc=legendLoc)
+    plt.show()
+    plt.savefig(f'../images/{countyName}.png')
 
 if __name__ == "__main__":
     df0 = pd.read_csv("../data/CA2020/ca2020D0.csv").set_index('County')
