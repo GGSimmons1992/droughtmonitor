@@ -3,6 +3,7 @@ import pandas as pd
 import scipy.stats as stats
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
+from datetime import datetime
 
 def defineColor(dcat):
     if (dcat == 0):
@@ -28,6 +29,8 @@ def plotConsecTimeSeries(df,countyName,legendLoc):
     ax.tick_params(axis='x',labelrotation=45)
     ax.set_ylabel('drought category')
     ax.set_ylim([-1,4])
+    xlims = [datetime.strptime('2020-01-01','%Y-%m-%d').date(),datetime.strptime('2020-12-31','%Y-%m-%d').date()]
+    ax.set_xlim(xlims)
     handles, labels = ax.get_legend_handles_labels()
     handle_list, label_list = [], []
     for handle, label in zip(handles, labels):
@@ -35,6 +38,7 @@ def plotConsecTimeSeries(df,countyName,legendLoc):
             handle_list.append(handle)
             label_list.append(label)
     ax.legend(handle_list, label_list,loc=legendLoc)
+    plt.tight_layout()
     plt.savefig(f'../images/{countyName}.png')
     plt.show()
 
@@ -56,6 +60,7 @@ def plotBootstrapSamples(countyName,sampleMeans,meanOfSamples,lowerCI,upperCI):
     ax.plot([meanOfSamples,meanOfSamples],[0,barheight])
     ax.plot([upperCI,upperCI],[0,barheight])
     ax.set_xlabel('average category')
-    ax.set_title(f'{countyName} avg category = {meanOfSamples} ([{lowerCI},{upperCI}])')
-    plt.savefig(f'../images/{countyName}95percentCI.png')
+    ax.set_title(f'{countyName} avg category = {round(meanOfSamples,2)} ([{round(lowerCI,2)},{round(upperCI,2)}])')
+    plt.tight_layout()
+    plt.savefig(f'../images/{countyName}95percentCI.png',)
     plt.show()
