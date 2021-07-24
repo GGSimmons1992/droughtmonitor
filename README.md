@@ -18,25 +18,44 @@ For graphing drought over time, we also retrieved the consecutive weeks csv file
 
 2c) Choropleth
 
+
 2d) Time Series Graph
 
 2e) Bar chart
 
+
+
 2f) 95% Confidence Interval
+
 
 2g) T-test
 
 3. Results
 
 3a) Choropleth
+![chorpleth](images/californiaChoropleth.png)
 
-3b) Time Series Graph
+This is choropleth of the weekly average drought categories for each county. -1 indicates no drought, 0 indicates as D0 (abnormally dry), 1 indicates as D1 (moderate drought), 2 indicates (severe drought), 3 indicates (extreme drought), and 4 indicates exceptional drought
+
+3b) Time Series Graph<br>
+
+![Inyo Time](images/Inyo%20County.png)
+
+![Trinity Time](images/Trinity%20County.png)
 
 3c) Bar chart
 
+![Bar Chart](images/weeksOfDroughtBar.png)
+
 3d) 95% Confidence Interval
 
+![Inyo 95](images/Inyo95percentCI.png)
+
+![Trinity 95](images/Trinity95percentCI.png)
+
 3e) T-test
+
+![ttest](images/ttest.png)
 
 4. Conclusions and future works
 
